@@ -1,0 +1,25 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: rating
+spec:
+  host: rating
+  subsets:
+  - labels:
+      version: v1
+    name: version-v1
+  - labels:
+      version: v2
+    name: version-v2
+  trafficPolicy:
+    connectionPool:
+      http:
+        http1MaxPendingRequests: 3
+        maxRequestsPerConnection: 3
+      tcp:
+        maxConnections: 3
+    outlierDetection:
+      baseEjectionTime: 3m
+      consecutive5xxErrors: 1
+      interval: 1s
+      maxEjectionPercent: 100

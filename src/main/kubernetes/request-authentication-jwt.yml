@@ -1,0 +1,12 @@
+apiVersion: "security.istio.io/v1beta1"
+kind: "RequestAuthentication"
+metadata:
+  name: "bookjwt"
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: book-service
+  jwtRules:
+  - issuer: "testing@secure.istio.io"
+    jwksUri: "https://gist.githubusercontent.com/lordofthejars/7dad589384612d7a6e18398ac0f10065/raw/ea0f8e7b729fb1df25d4dc60bf17dee409aad204/jwks.json"

@@ -1,0 +1,13 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: rating
+spec:
+  host: rating
+  subsets:
+  - labels:
+      app.kubernetes.io/version: v1.0.0
+    name: version-v1
+  - labels:
+      app.kubernetes.io/version: v2.0.0
+    name: version-v2
